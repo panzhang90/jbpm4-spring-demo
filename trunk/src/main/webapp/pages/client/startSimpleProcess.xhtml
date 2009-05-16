@@ -12,7 +12,8 @@
 	<ui:composition template="/template/template.xhtml">
 		<ui:define name="body">
 		
-			<p>TEST <h:commandButton action="#{simpleProcessBackingBean.start()}" value="start" />  </p>
+		
+			<p> <h:commandButton action="#{simpleProcessBackingBean.start()}" value="start" rendered="#{simpleProcessBackingBean.isProcessDeployed()}"/>  </p>
 			
 						
 		</ui:define>		

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<process name="DecisionConditions" xmlns="http://jbpm.org/4.0/jpdl">
+<process name="DemoProcess" xmlns="http://jbpm.org/4.0/jpdl">
 
   <start g="16,102,48,48">
     <transition to="give up" />
