@@ -5,10 +5,6 @@
 	xsi:schemaLocation="
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
 
-	<bean id="attestPersonService" class="be.inze.spring.demo.service.impl.AttestPersonServiceImpl">
-		<property name="attestPersonDAO" ref="attestPersonDAO"/>
-	</bean>
-
 	<bean id="deployService" class="be.inze.spring.demo.service.impl.DeployServiceImpl">
 		<property name="repositoryService" ref="repositoryService" />
 	</bean>
