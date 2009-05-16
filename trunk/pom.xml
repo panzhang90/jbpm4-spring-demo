@@ -4,7 +4,7 @@
 	<groupId>be.inze.spring.demo</groupId>
 	<artifactId>jbpm4-spring</artifactId>
 	<packaging>war</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>jBPM4 Spring integration </name>
 	<url>http://maven.apache.org</url>
 	<build>
