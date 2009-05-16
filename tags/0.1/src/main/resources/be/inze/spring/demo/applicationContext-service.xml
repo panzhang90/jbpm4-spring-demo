@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="deployService" class="be.inze.spring.demo.service.impl.DeployServiceImpl">
+		<property name="repositoryService" ref="repositoryService" />
+	</bean>
+	
+	<bean id="processInformationService" class="be.inze.spring.demo.service.impl.ProcessInformationServiceImpl">
+		<property name="repositoryService" ref="repositoryService" />
+		<property name="executionService" ref="executionService" />
+	</bean>
+	
+	<bean id="simpleProcessService" class="be.inze.spring.demo.service.impl.SimpleProcessServiceImpl">
+		<property name="repositoryService" ref="repositoryService" />
+		<property name="executionService" ref="executionService" />
+	</bean>
+</beans>
