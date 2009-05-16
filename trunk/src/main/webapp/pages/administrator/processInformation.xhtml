@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="body">
+
+		<p>All processDefinitions:
+		
+		<h:dataTable value="#{processInformationBackingBean.getAllProcessDefinitionKeys()}" var="item" class="gridTab">
+			<h:column>
+				<f:facet name="header">Key</f:facet>
+				<h:outputLabel value="#{item.key}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputLabel value="#{item.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Version</f:facet>
+				<h:outputLabel value="#{item.version}" />
+			</h:column>
+		</h:dataTable>
+		</p>
+		
+		<p>All open executions:
+			<h:dataTable value="#{processInformationBackingBean.getAllOpenExecutions()}" var="item" class="gridTab">
+			<h:column>
+				<f:facet name="header">Key</f:facet>
+				<h:outputLabel value="#{item.key}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				<h:outputLabel value="#{item.name}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">Id</f:facet>
+				<h:outputLabel value="#{item.id}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">State</f:facet>
+				<h:outputLabel value="#{item.state}" />
+			</h:column>
+		</h:dataTable>
+		</p>
+
+
+	</ui:define>
+</ui:composition>
+</html>

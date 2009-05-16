@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="attestPersonDAO" class="be.inze.spring.demo.dao.impl.AttestPersonDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<bean id="dossierDAO" class="be.inze.spring.demo.dao.impl.DossierDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"/>
+	</bean>
+
+	<bean id="languageDAO" class="be.inze.spring.demo.dao.impl.LanguageDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="postalcodeDAO" class="be.inze.spring.demo.dao.impl.PostalcodeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="professionDAO" class="be.inze.spring.demo.dao.impl.ProfessionDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+</beans>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>	
+
+<f:loadBundle basename="be.inze.spring.properties.ApplicationResources"
+	var="messages" />
+	<head>
+	<title>#{messages['website.header']}</title>
+	<link rel="stylesheet" type="text/css" href="/jbpm4-spring/style/style.css" />
+	</head>
+	<body>
+	<h:form id="mainForm">
+
+		<div id="wrap">
+		
+		<div id="header">
+		<h1>#{messages['website.title']}</h1>
+		<br />
+		<h2>#{messages['website.subtitle']}</h2>
+		</div>
+
+
+		<div class="left"><ui:insert name="body" /></div>
+
+		<div class="right"><ui:include src="/common/menu.xhtml" /></div>
+
+		<div style="clear: both;" />
+
+		<div id="footer">#{messages['website.footer']}</div>
+
+		</div>
+
+		<br/>
+	</h:form>
+	</body>
+</html>
