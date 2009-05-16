@@ -58,6 +58,9 @@
 			<list>
 				<value>classpath:jbpm.execution.hbm.xml</value>
 				<value>classpath:jbpm.repository.hbm.xml</value>
+				<value>classpath:jbpm.jpdl.hbm.xml</value>
+				<value>classpath:jbpm.task.hbm.xml</value>
+				<value>classpath:jbpm.history.hbm.xml</value>
 			</list>
 		</property>
 	</bean>

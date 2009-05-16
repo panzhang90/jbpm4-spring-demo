@@ -1,25 +1,21 @@
 package be.inze.spring.demo.jsf;
 
-import javax.swing.JOptionPane;
-
-import org.jbpm.api.RepositoryService;
+import be.inze.spring.demo.service.SimpleProcessService;
 
 public class SimpleProcessBackingBean {
 
-	private RepositoryService repositoryService;
+	private SimpleProcessService simpleProcessService;
 	
-	public void init() {
-		JOptionPane.showMessageDialog(null, "HELP");
-		System.out.println("TEST");
+	public boolean isProcessDeployed() {
+		return simpleProcessService.isProcessDeployed();
 	}
 	
 	public void start() {
-		System.out.println("start");
+		simpleProcessService.startProcess();
 	}
 
-	public void setRepositoryService(RepositoryService repositoryService) {
-		this.repositoryService = repositoryService;
+	public void setSimpleProcessService(SimpleProcessService simpleProcessService) {
+		this.simpleProcessService = simpleProcessService;
 	}
-	
 	
 }

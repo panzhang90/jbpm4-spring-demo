@@ -13,4 +13,9 @@
 		<property name="repositoryService" ref="repositoryService" />
 		<property name="executionService" ref="executionService" />
 	</bean>
+	
+	<bean id="simpleProcessService" class="be.inze.spring.demo.service.impl.SimpleProcessServiceImpl">
+		<property name="repositoryService" ref="repositoryService" />
+		<property name="executionService" ref="executionService" />
+	</bean>
 </beans>

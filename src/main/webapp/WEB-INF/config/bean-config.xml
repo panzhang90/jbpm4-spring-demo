@@ -13,8 +13,8 @@
 		</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
-			<property-name>repositoryService</property-name>
-			<value>#{repositoryService}</value>
+			<property-name>simpleProcessService</property-name>
+			<value>#{simpleProcessService}</value>
 		</managed-property>
 	</managed-bean>
 
