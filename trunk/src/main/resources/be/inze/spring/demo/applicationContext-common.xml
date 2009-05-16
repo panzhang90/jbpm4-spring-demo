@@ -54,23 +54,6 @@
 				<value>classpath:be/inze/spring/demo/hibernate.cfg.xml</value>
 			</list>
 			</property>
-		
-		<!--
-		
-		
-		<property name="annotatedClasses">
-			<list>
-				<value>be.inze.spring.demo.domain.AttestPerson</value>
-				<value>be.inze.spring.demo.domain.Language</value>
-				<value>be.inze.spring.demo.domain.Postalcode</value>
-				<value>be.inze.spring.demo.domain.Profession</value>
-				<value>be.inze.spring.demo.domain.Dossier</value>
-				<value>be.inze.spring.demo.domain.DossierPK</value>
-				<value>be.inze.spring.demo.domain.BaseDescription</value>
-				<value>be.inze.spring.demo.domain.Chamber</value>
-			</list>
-		</property>
-	-->
 		<property name="mappingLocations">
 			<list>
 				<value>classpath:jbpm.execution.hbm.xml</value>
