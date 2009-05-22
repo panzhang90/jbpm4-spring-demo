@@ -5,8 +5,8 @@ package be.inze.spring.demo.jsf;
 
 import java.util.List;
 
-import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
 
 import be.inze.spring.demo.service.ProcessInformationService;
 
@@ -23,7 +23,7 @@ public class ProcessInformationBackingBean {
 	}
 
 	
-	public List<Execution> getAllOpenExecutions() {
+	public List<ProcessInstance> getAllOpenExecutions() {
 		return processInformationService.getAllOpenExecutions();
 	}
 	public void setProcessInformationService(ProcessInformationService processInformationService) {
