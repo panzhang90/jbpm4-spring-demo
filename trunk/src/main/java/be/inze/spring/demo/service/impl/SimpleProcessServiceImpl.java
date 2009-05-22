@@ -18,8 +18,7 @@ public class SimpleProcessServiceImpl implements SimpleProcessService{
 	private ExecutionService executionService;
 	
 	public boolean isProcessDeployed() {
-		System.out.println("HIER:" + repositoryService.createProcessDefinitionQuery().key("DemoProcess").uniqueResult());
-		return null != repositoryService.createProcessDefinitionQuery().key("DemoProcess").uniqueResult();
+		return null != repositoryService.createProcessDefinitionQuery().processDefinitionKey("DemoProcess").uniqueResult();
 	}
 	
 	public void startProcess() {

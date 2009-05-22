@@ -8,6 +8,7 @@ import java.util.List;
 import org.jbpm.api.Execution;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.ProcessDefinition;
+import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.RepositoryService;
 
 import be.inze.spring.demo.service.ProcessInformationService;
@@ -25,7 +26,7 @@ public class ProcessInformationServiceImpl implements ProcessInformationService 
 		return repositoryService.createProcessDefinitionQuery().list();
 	}
 	
-	public List<Execution> getAllOpenExecutions() {
+	public List<ProcessInstance> getAllOpenExecutions() {
 		return executionService.createProcessInstanceQuery().list();
 	}
 
