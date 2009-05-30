@@ -1,46 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<jbpm-configuration xmlns="http://jbpm.org/xsd/cfg">
+<jbpm-configuration>
+
+  <import resource="jbpm.jpdl.cfg.xml" />
+  <import resource="jbpm.identity.cfg.xml" />
 
   <process-engine-context>
+  
   
     <repository-service />
     <repository-cache />
     <execution-service />
     <history-service />
     <management-service />
-    <task-service />
     <identity-service />
-    <command-service>
-      <retry-interceptor />
-      <environment-interceptor />
-      <spring-transaction-interceptor current="true"/>
-      
-      <!--<spring-transaction-interceptor />-->
-    	
-    </command-service>
-    
-    <hibernate-configuration>
-      <cfg resource="jbpm.hibernate.cfg.xml" />     
-    </hibernate-configuration>
+    <task-service />
 
-    <deployer-manager>
-      <jpdl-deployer />
-    </deployer-manager>
-    
+
     <script-manager default-expression-language="juel"
                     default-script-language="juel"
-                    read-contexts="execution, environment, process-engine"
+                    read-contexts="execution, environment, process-engine, spring"
                     write-context="">
-        <script-language name="juel" factory="org.jbpm.pvm.internal.script.JuelScriptEngineFactory" />
+      <script-language name="juel" factory="org.jbpm.pvm.internal.script.JuelScriptEngineFactory" />
     </script-manager>
     
     <authentication />
 
-    <job-executor auto-start="false" />
-
     <id-generator />
     <types resource="jbpm.variable.types.xml" />
+
+    <address-resolver />
 
     <business-calendar>
       <monday    hours="9:00-12:00 and 12:30-17:00"/>
@@ -50,23 +39,49 @@
       <friday    hours="9:00-12:00 and 12:30-17:00"/>
       <holiday period="01/07/2008 - 31/08/2008"/>
     </business-calendar>
+    
+    <mail-template name='task-notification'>
+      <to users="${task.assignee}"/>
+      <subject>${task.name}</subject>
+      <text><![CDATA[Hi ${task.assignee},
+Task "${task.name}" has been assigned to you.
+${task.description}
+
+Sent by JBoss jBPM
+]]></text>
+    </mail-template>
   
+    <mail-template name='task-reminder'>
+      <to users="${task.assignee}"/>
+      <subject>${task.name}</subject>
+      <text><![CDATA[Hey ${task.assignee},
+Do not forget about task "${task.name}".
+${task.description}
+
+Sent by JBoss jBPM
+]]></text>
+    </mail-template>
+    
+    <command-service>
+      <retry-interceptor />
+      <environment-interceptor />
+      <spring-transaction-interceptor current="true" />
+    </command-service>
   </process-engine-context>
 
   <transaction-context>
     <repository-session />
-    <pvm-db-session />
-    <job-db-session />
-    <task-db-session />
+    <db-session />
+    
     <message-session />
     <timer-session />
     <history-session />
-    <transaction />
+    <mail-session>
+      <mail-server>
+        <session-properties resource="jbpm.mail.properties" />
+      </mail-server>
+    </mail-session>
     
-    <hibernate-session />
-    
-    <hibernate-session current="true" />
-    <identity-session />
+    <hibernate-session current="true"/>
   </transaction-context>
-
 </jbpm-configuration>
