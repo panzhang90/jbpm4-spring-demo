@@ -5,7 +5,6 @@ package be.inze.spring.demo.service.impl;
 
 import java.util.List;
 
-import org.jbpm.api.Execution;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.ProcessDefinition;
 import org.jbpm.api.ProcessInstance;
