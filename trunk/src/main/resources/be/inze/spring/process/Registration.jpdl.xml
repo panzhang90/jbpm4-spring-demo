@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<process name="DemoProcess" xmlns="http://jbpm.org/4.0/jpdl">
+<process name="DemoProcess" xxmlns="http://jbpm.org/4.0/jpdl">
 
   <start g="16,102,48,48">
-    <transition to="give up" />
+    <transition to="java1"/>
   </start>
 
-  <state name="give up" g="177,164,122,52"/>
+   <java name="java1" g="144,91,92,52" expr="#{echoService}"
+   	method="sayHello"
+   		>
+      <transition name="to give up" to="give up" g="-70,-22"/>
+   </java>
    
+  <state g="177,164,122,52" name="give up"/>
+  
 </process>

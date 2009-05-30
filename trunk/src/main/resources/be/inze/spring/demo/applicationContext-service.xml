@@ -18,4 +18,6 @@
 		<property name="repositoryService" ref="repositoryService" />
 		<property name="executionService" ref="executionService" />
 	</bean>
+	
+	<bean id="echoService" class="be.inze.spring.demo.service.impl.EchoServiceImpl" />
 </beans>

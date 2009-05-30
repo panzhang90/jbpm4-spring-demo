@@ -49,8 +49,7 @@
 
 	<properties>
 		<spring.version>2.0.8</spring.version>
-		<hibernate.version>3.2.4.sp1</hibernate.version>
-		<hibernate-annotations.version>3.2.1.ga</hibernate-annotations.version>
+		<hibernate.version>3.3.1.GA</hibernate.version>
 		<acegi-security.version>1.0.3</acegi-security.version>
 		<richfaces.version>3.3.0.GA</richfaces.version>
 		<jboss-el.version>2.0.1.GA</jboss-el.version>
@@ -58,7 +57,7 @@
 		<aspectjweaver.version>1.5.4</aspectjweaver.version>
 		<xerces.version>2.9.1</xerces.version>
 		<jsf.version>1.2_04-p02</jsf.version>
-		<jbpm.version>4.0.0-SNAPSHOT</jbpm.version>
+		<jbpm.version>4.0-SNAPSHOT</jbpm.version>
 	</properties>
 
 	<dependencies>
@@ -149,13 +148,8 @@
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate</artifactId>
+			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-annotations</artifactId>
-			<version>${hibernate-annotations.version}</version>
 		</dependency>
 		
 		<!-- 1.2.14 is minimum (jbpm is tracing) -->
