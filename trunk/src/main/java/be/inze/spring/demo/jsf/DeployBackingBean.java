@@ -13,9 +13,15 @@ public class DeployBackingBean {
 
 	private DeployService deployService;
 
+	private boolean success = false;
+	
 	public void deploy() {
 		deployService.deploy("be/inze/spring/process/Registration.jpdl.xml");
-//		deployService.deploy("be/inze/spring/process/process.jpdl.xml");
+		success = true;
+	}
+	
+	public boolean success() {
+		return success;
 	}
 
 	public void setDeployService(
