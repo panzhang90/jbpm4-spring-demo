@@ -3,6 +3,8 @@
  */
 package be.inze.spring.demo.service.impl;
 
+import org.jbpm.api.Execution;
+
 import be.inze.spring.demo.service.EchoService;
 
 /**
@@ -16,6 +18,11 @@ public class EchoServiceImpl implements EchoService {
 	 */
 	public void sayHello() {
 		System.out.println("Hello!!");
+	}
+
+	public void sayHelloWithExecution(Object execution) {
+		System.out.println("Hello Again!!");
+		
 	}
 
 }

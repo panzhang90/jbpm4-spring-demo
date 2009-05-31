@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<process name="DemoProcess" xxmlns="http://jbpm.org/4.0/jpdl">
+<process name="DemoProcess" xmlns="http://jbpm.org/4.0/jpdl">
 
-  <start g="16,102,48,48">
-    <transition to="java1"/>
-  </start>
+	<start g="53,16,48,48">
+		<transition to="java1" />
+	</start>
 
-   <java name="java1" g="144,91,92,52" expr="#{echoService}"
-   	method="sayHello"
-   		>
-      <transition name="to give up" to="give up" g="-70,-22"/>
-   </java>
-   
-  <state g="177,164,122,52" name="give up"/>
-  
+	<java expr="#{echoService}" g="31,96,92,52" method="sayHello"
+		name="java1">
+		<transition g="-70,-22" name="java2" to="java2" />
+	</java>
+
+	<java expr="#{echoService}" g="31,180,92,52" method="sayHelloWithExecution"
+		name="java2">
+		<arg>
+			<env type="org.jbpm.pvm.internal.history.HistorySession" />
+		</arg>
+		<transition g="-70,-22" name="to give up" to="give up" />
+	</java>
+
+	<state g="16,264,122,52" name="give up" />
+
 </process>
