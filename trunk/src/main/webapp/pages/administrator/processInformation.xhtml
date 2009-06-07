@@ -10,9 +10,11 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <ui:composition template="/template/template.xhtml">
 	<ui:define name="body">
-
+		<p>Add a new definition: <a4j:commandButton action="#{deployBackingBean.deploy()}" value="Deploy" reRender="panel1"/></p>
+		<p>Add a new processExecution: <a4j:commandButton action="#{simpleProcessBackingBean.start()}" value="start" reRender="panel"/></p>
 		<p>All processDefinitions:
 		
+		<a4j:outputPanel id="panel1" ajaxRendered="true">
 		<h:dataTable value="#{processInformationBackingBean.getAllProcessDefinitionKeys()}" var="item" class="gridTab">
 			<h:column>
 				<f:facet name="header">Key</f:facet>
@@ -27,14 +29,16 @@
 				<h:outputLabel value="#{item.version}" />
 			</h:column>
 		</h:dataTable>
+		</a4j:outputPanel>
 		</p>
 		
+		<a4j:outputPanel id="panel" ajaxRendered="true">
 		<p>All open executions:
-			<h:dataTable value="#{processInformationBackingBean.getAllOpenExecutions()}" var="item" class="gridTab">
-			<h:column>
+			<h:dataTable id="table" value="#{processInformationBackingBean.getAllOpenExecutions()}" var="item" >
+			<rich:column>
 				<f:facet name="header">Key</f:facet>
 				<h:outputLabel value="#{item.key}" />
-			</h:column>
+			</rich:column>
 			<h:column>
 				<f:facet name="header">Name</f:facet>
 				<h:outputLabel value="#{item.name}" />
@@ -51,9 +55,13 @@
 				<f:facet name="header">Activity</f:facet>
 				<h:outputLabel value="#{item.activityName}" />
 			</h:column>
+			<h:column>
+				<f:facet name="header">signal</f:facet>
+				<a4j:commandButton action="#{processInformationBackingBean.signal(item)}" value="signal"/>	
+			</h:column>
 		</h:dataTable>
 		</p>
-
+</a4j:outputPanel>
 
 	</ui:define>
 </ui:composition>

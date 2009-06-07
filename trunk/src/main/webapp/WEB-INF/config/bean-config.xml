@@ -41,6 +41,10 @@
 			<property-name>processInformationService</property-name>
 			<value>#{processInformationService}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>simpleProcessService</property-name>
+			<value>#{simpleProcessService}</value>
+		</managed-property>
 	</managed-bean>
 
 </faces-config>
