@@ -20,4 +20,9 @@
 	</bean>
 	
 	<bean id="echoService" class="be.inze.spring.demo.service.impl.EchoServiceImpl" />
+	
+	<bean id="initialFillService" class="be.inze.spring.demo.service.impl.InitialFillServiceImpl" init-method="init">
+		<property name="deployService" ref="deployService" />
+		<property name="simpleProcessService" ref="simpleProcessService" />
+	</bean>
 </beans>

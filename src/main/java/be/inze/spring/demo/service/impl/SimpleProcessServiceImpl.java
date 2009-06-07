@@ -3,6 +3,7 @@
  */
 package be.inze.spring.demo.service.impl;
 
+import org.jbpm.api.Execution;
 import org.jbpm.api.ExecutionService;
 import org.jbpm.api.RepositoryService;
 
@@ -18,11 +19,16 @@ public class SimpleProcessServiceImpl implements SimpleProcessService{
 	private ExecutionService executionService;
 	
 	public boolean isProcessDeployed() {
-		return null != repositoryService.createProcessDefinitionQuery().processDefinitionKey("DemoProcess").uniqueResult();
+		return repositoryService.createProcessDefinitionQuery().processDefinitionKey("DemoProcess").list().size() > 0;
 	}
 	
 	public void startProcess() {
 		executionService.startProcessInstanceByKey("DemoProcess");
+	}
+	
+	public void signal(Execution execution) {
+		
+		executionService.signalExecutionById(execution.getId(), "transition");
 	}
 
 	public void setRepositoryService(RepositoryService repositoryService) {
@@ -32,6 +38,6 @@ public class SimpleProcessServiceImpl implements SimpleProcessService{
 	public void setExecutionService(ExecutionService executionService) {
 		this.executionService = executionService;
 	}
-	
-	
+
+
 }
