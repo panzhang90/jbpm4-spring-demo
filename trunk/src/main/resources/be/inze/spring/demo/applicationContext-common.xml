@@ -19,7 +19,7 @@
 
 	<aop:aspectj-autoproxy/>
 
-	<tx:advice id="txAdvice" transaction-manager="txManager">
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<!--<tx:method name="get*" read-only="true" propagation="SUPPORTS" />
 			<tx:method name="find*" read-only="true" propagation="SUPPORTS" />-->
@@ -65,7 +65,7 @@
 		</property>
 	</bean>
 
-	<bean id="txManager"
+	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
