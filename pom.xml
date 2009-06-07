@@ -54,10 +54,11 @@
 		<richfaces.version>3.3.0.GA</richfaces.version>
 		<jboss-el.version>2.0.1.GA</jboss-el.version>
 		<facelets.version>1.1.14</facelets.version>
-		<aspectjweaver.version>1.5.4</aspectjweaver.version>
+		<aspectjweaver.version>1.6.4</aspectjweaver.version>
 		<xerces.version>2.9.1</xerces.version>
 		<jsf.version>1.2_04-p02</jsf.version>
 		<jbpm.version>4.0-SNAPSHOT</jbpm.version>
+		<commons-collections.version>3.2.1</commons-collections.version>
 	</properties>
 
 	<dependencies>
@@ -151,14 +152,14 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>${hibernate.version}</version>
 		</dependency>
-		
+
 		<!-- 1.2.14 is minimum (jbpm is tracing) -->
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 		</dependency>
-		
+
 		<!--
 
 			<dependency> <groupId>org.springframework</groupId>
@@ -185,7 +186,8 @@
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.6.4</version>
+			<version>${aspectjweaver.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -199,6 +201,12 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.4</version>
 			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+			<version>${commons-collections.version}</version>
 		</dependency>
 	</dependencies>
 
