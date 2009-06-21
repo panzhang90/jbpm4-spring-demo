@@ -21,17 +21,11 @@ public class RegistrationProcessTests extends
 				"be/inze/spring/demo/applicationContext-process.xml",
 				"be/inze/spring/demo/applicationContext-service.xml" };
 	}
-	
-	
 
 	@Override
 	protected void onSetUpInTransaction() throws Exception {
 		super.onSetUpInTransaction();
-
-		Deployment deployment = repositoryService.createDeployment();
-		deployment.addResourceFromFile(new ClassPathResource(
-				"be/inze/spring/process/Registration.jpdl.xml").getFile());
-		deployment.deploy();
+		deployJpdlFrpmClasspath("be/inze/spring/process/Registration.jpdl.xml");
 	}
 
 	public void testStart() {
