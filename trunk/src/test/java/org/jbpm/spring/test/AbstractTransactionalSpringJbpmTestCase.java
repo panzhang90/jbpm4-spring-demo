@@ -3,7 +3,7 @@
  */
 package org.jbpm.spring.test;
 
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import org.jbpm.api.Configuration;
@@ -16,13 +16,19 @@ import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
 import org.jbpm.api.cmd.CommandService;
 import org.jbpm.api.task.Task;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 
 /**
- * Abstract test class that - builds the application context - runs in 1
- * transaction - adds convenience methods: e.g. deploying a process.
+ * Convenient superclass for tests of processes that should occur in a
+ * transaction, but normally will roll the transaction back on the completion of
+ * each test.
+ * 
+ * It contains some convenience methods: * Deploying XML or
+ * 
  * 
  * @author Andries Inze
+ * @see AbstractTransactionalDataSourceSpringContextTests
  * 
  */
 public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTransactionalDataSourceSpringContextTests {
@@ -36,15 +42,11 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
   protected TaskService taskService;
   protected HistoryService historyService;
   protected IdentityService identityService;
-
   protected CommandService commandService;
 
-  protected List<String> taskIds;
-  
-  /** registered deployments.  registered deployments will be deleted automatically 
-   * in the tearDown. This is a convenience function as each test is expected to clean up the DB. */
-  protected List<Long> registeredDeployments = new ArrayList<Long>();
-
+  /**
+   * Creates a new instance. Will require a transactionManager.
+   */
   public AbstractTransactionalSpringJbpmTestCase() {
     super();
 
@@ -60,7 +62,7 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
   protected void injectDependencies() throws Exception {
     super.injectDependencies();
 
-    configuration = (Configuration) applicationContext.getBean("jbpmConfiguration");
+    configuration = (Configuration) applicationContext.getBean(getJbpmConfigurationName());
     processEngine = configuration.buildProcessEngine();
 
     repositoryService = processEngine.get(RepositoryService.class);
@@ -71,68 +73,62 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
     identityService = processEngine.getIdentityService();
     commandService = processEngine.get(CommandService.class);
   }
-  
-  
 
-  @Override
-  protected void onSetUp() throws Exception {
-    super.onSetUp();
-
-  }
-  
-  
-
-  @Override
-  protected void onTearDownInTransaction() throws Exception {
-//    super.onTearDownInTransaction();
-//      for (Long deploymentDbid : registeredDeployments) {
-//        repositoryService.deleteDeploymentCascade(deploymentDbid);
-//      }
-
-//      Db.verifyClean(processEngine);
-
+  /**
+   * Default configuration name. Overwrite this if the jbpm configuration is
+   * named different.
+   * 
+   * @return the jbpmConfigurationName
+   */
+  protected String getJbpmConfigurationName() {
+    return "jbpmConfiguration";
   }
 
-  /** deploys the process, keeps a reference to the deployment and 
-   * automatically deletes the deployment in the tearDown */
+  /**
+   * deploys the process, keeps a reference to the deployment and automatically
+   * deletes the deployment in the tearDown
+   */
   public long deployJpdlXmlString(String jpdlXmlString) {
-    long deploymentDbid =
-        repositoryService.createDeployment()
-            .addResourceFromString("xmlstring.jpdl.xml", jpdlXmlString)
-            .deploy();
-
-    registerDeployment(deploymentDbid);
+    long deploymentDbid = repositoryService.createDeployment().addResourceFromString("xmlstring.jpdl.xml", jpdlXmlString).deploy();
 
     return deploymentDbid;
   }
-  
-  /** registered deployments will be deleted in the tearDown */
-  protected void registerDeployment(long deploymentDbid) {
-    registeredDeployments.add(deploymentDbid);
+
+  /**
+   * deploys the process, keeps a reference to the deployment and automatically
+   * deletes the deployment in the tearDown
+   */
+  public long deployJpdlFrpmClasspath(String jpdlXmlString) {
+    long deploymentDbid;
+    try {
+      deploymentDbid = repositoryService.createDeployment().addResourceFromInputStream("xmlstring.jpdl.xml",
+              new ClassPathResource(jpdlXmlString).getInputStream()).deploy();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    return deploymentDbid;
   }
-  
+
   public void assertTextPresent(String expected, String value) {
-    
-    //TODO utility!
-    if ( (value==null)
-         || (value.indexOf(expected)==-1)
-       ) {
-      fail("expected presence of '"+expected+"' but was '"+value+"'");
+    // TODO utility!
+    if ((value == null) || (value.indexOf(expected) == -1)) {
+      fail("expected presence of '" + expected + "' but was '" + value + "'");
     }
   }
-  
+
   public static void assertContainsTask(List<Task> taskList, String taskName) {
-    if (getTask(taskList, taskName)==null) {
-      fail("tasklist doesn't contain task '"+taskName+"': "+taskList);
+    if (getTask(taskList, taskName) == null) {
+      fail("tasklist doesn't contain task '" + taskName + "': " + taskList);
     }
   }
 
   public static void assertContainsTask(List<Task> taskList, String taskName, String assignee) {
-    if (getTask(taskList, taskName, assignee)==null) {
-      fail("tasklist doesn't contain task '"+taskName+"' for assignee '"+assignee+"': "+taskList);
+    if (getTask(taskList, taskName, assignee) == null) {
+      fail("tasklist doesn't contain task '" + taskName + "' for assignee '" + assignee + "': " + taskList);
     }
   }
-  
+
   public static Task getTask(List<Task> taskList, String taskName) {
     for (Task task : taskList) {
       if (taskName.equals(task.getName())) {
@@ -141,12 +137,12 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
     }
     return null;
   }
-  
+
   public static Task getTask(List<Task> taskList, String taskName, String assignee) {
     for (Task task : taskList) {
       if (taskName.equals(task.getName())) {
-        if (assignee==null) {
-          if (task.getAssignee()==null) {
+        if (assignee == null) {
+          if (task.getAssignee() == null) {
             return task;
           }
         } else {
@@ -157,5 +153,9 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
       }
     }
     return null;
+  }
+
+  public void assertProcessInstanceEnded(String processInstanceId) {
+    assertNull("Error: a process instance with id " + processInstanceId + " was found", executionService.findProcessInstanceById(processInstanceId));
   }
 }
