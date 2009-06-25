@@ -4,7 +4,9 @@
 package be.inze.spring.demo.service.impl;
 
 import org.jbpm.api.Deployment;
+import org.jbpm.api.NewDeployment;
 import org.jbpm.api.RepositoryService;
+import org.jbpm.pvm.internal.repository.DeploymentImpl;
 
 import be.inze.spring.demo.service.DeployService;
 
@@ -18,7 +20,7 @@ public class DeployServiceImpl implements DeployService {
 
 
 	public void deploy(String processDefinition) {
-		Deployment deployment = repositoryService.createDeployment();
+		NewDeployment deployment = repositoryService.createDeployment();
 		deployment.addResourceFromClasspath(processDefinition);
 		deployment.deploy();
 	}

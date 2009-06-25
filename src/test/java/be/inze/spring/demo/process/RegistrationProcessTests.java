@@ -1,11 +1,8 @@
 package be.inze.spring.demo.process;
 
-import org.jbpm.api.Deployment;
-import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessInstance;
-import org.jbpm.jpdl.internal.model.JpdlExecution;
+import org.jbpm.api.activity.ActivityExecution;
 import org.jbpm.spring.test.AbstractTransactionalSpringJbpmTestCase;
-import org.springframework.core.io.ClassPathResource;
 
 public class RegistrationProcessTests extends
 		AbstractTransactionalSpringJbpmTestCase {
@@ -39,8 +36,8 @@ public class RegistrationProcessTests extends
 		testStart();
 		
 		ProcessInstance processInstance = executionService.signalExecutionById(processInstanceId, "transition");
-		JpdlExecution jpdlExecution = (JpdlExecution) processInstance;
-		assertEquals("grant access", jpdlExecution.getActivityName());
+		ActivityExecution activityExecution = (ActivityExecution) processInstance;
+		assertEquals("grant access", activityExecution.getActivityName());
 	}
 
 }

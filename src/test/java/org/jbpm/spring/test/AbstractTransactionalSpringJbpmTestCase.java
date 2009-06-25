@@ -14,8 +14,8 @@ import org.jbpm.api.ManagementService;
 import org.jbpm.api.ProcessEngine;
 import org.jbpm.api.RepositoryService;
 import org.jbpm.api.TaskService;
-import org.jbpm.api.cmd.CommandService;
 import org.jbpm.api.task.Task;
+import org.jbpm.pvm.internal.cmd.CommandService;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.test.AbstractTransactionalDataSourceSpringContextTests;
 

@@ -4,6 +4,10 @@
 
   <import resource="jbpm.jpdl.cfg.xml" />
   <import resource="jbpm.identity.cfg.xml" />
+  <!-- 
+  
+   -->
+  <import resource="jbpm.jobexecutor.cfg.xml" />
 
   <process-engine-context>
   
@@ -65,7 +69,13 @@ Sent by JBoss jBPM
     <command-service>
       <retry-interceptor />
       <environment-interceptor />
+      <!-- 
+       <object expr="#{spring-transaction-interceptor}" />
+       <env object="spring-transaction-interceptor" />
+      <spring-interceptor />
       <spring-transaction-interceptor current="true" />
+       -->
+      <spring-transaction-interceptor />
     </command-service>
   </process-engine-context>
 
@@ -74,7 +84,7 @@ Sent by JBoss jBPM
     <db-session />
     
     <message-session />
-    <timer-session />
+    <timer-session session="hibernateSession"/>
     <history-session />
     <mail-session>
       <mail-server>
