@@ -4,14 +4,9 @@
 
 	<import resource="jbpm.jpdl.cfg.xml" />
 	<import resource="jbpm.identity.cfg.xml" />
-	<!-- 
-  
-   -->
 	<import resource="jbpm.jobexecutor.cfg.xml" />
 
 	<process-engine-context>
-
-
 		<repository-service />
 		<repository-cache />
 		<execution-service />
@@ -20,13 +15,14 @@
 		<identity-service />
 		<task-service />
 
+		<!-- Here we needed to change the transaction interceptor -->
 		<command-service>
 			<retry-interceptor />
 			<environment-interceptor />
 			<spring-transaction-interceptor />
 		</command-service>
 
-
+		<!-- Added spring as read-context -->
 		<script-manager default-expression-language="juel"
 			default-script-language="juel"
 			read-contexts="execution, environment, process-engine, spring"
@@ -82,7 +78,7 @@ Sent by JBoss jBPM
 		<db-session />
 
 		<message-session />
-		<timer-session session="hibernateSession" />
+		<timer-session />
 		<history-session />
 		<mail-session>
 			<mail-server>
@@ -90,6 +86,7 @@ Sent by JBoss jBPM
 			</mail-server>
 		</mail-session>
 
+		<!-- Need to set explicitly that we don't want jbpm to create sessions -->
 		<hibernate-session current="true" />
 	</transaction-context>
 </jbpm-configuration>
