@@ -13,18 +13,8 @@
 			<to-view-id>/index.xhtml</to-view-id>
 		</navigation-case>
 		<navigation-case>
-			<from-outcome>startSimpleProcess</from-outcome>
-			<to-view-id>/pages/client/startSimpleProcess.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>deployProcess</from-outcome>
-			<to-view-id>/pages/administrator/deployProcess.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		<navigation-case>
-			<from-outcome>processInformation</from-outcome>
-			<to-view-id>/pages/administrator/processInformation.xhtml</to-view-id>
+			<from-outcome>registrationProcess</from-outcome>
+			<to-view-id>/pages/RegistrationProcess.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

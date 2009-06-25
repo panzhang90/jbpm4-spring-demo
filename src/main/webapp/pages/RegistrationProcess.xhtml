@@ -10,9 +10,12 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 <ui:composition template="/template/template.xhtml">
 	<ui:define name="body">
+	<a4j:queue id="myQueue" ignoreDupResponses="true"/>
+	<a4j:poll reRender="panel" interval="3000" />
 		<p>Add a new definition: <a4j:commandButton action="#{deployBackingBean.deploy()}" value="Deploy" reRender="panel1"/></p>
 		<p>Add a new processExecution: <a4j:commandButton action="#{simpleProcessBackingBean.start()}" value="start" reRender="panel"/></p>
 		<p>All processDefinitions:
+		
 		
 		<a4j:outputPanel id="panel1" ajaxRendered="true">
 		<h:dataTable value="#{processInformationBackingBean.getAllProcessDefinitionKeys()}" var="item" class="gridTab">
@@ -61,6 +64,7 @@
 			</h:column>
 		</h:dataTable>
 		</p>
+		<a4j:status id="commonstatus"  startText="In progress..." stopText="No ajax request running"/>
 </a4j:outputPanel>
 
 	</ui:define>
