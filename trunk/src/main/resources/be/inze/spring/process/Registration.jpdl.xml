@@ -6,6 +6,7 @@
 		<transition to="echo"/>
 	</start>
 
+<!-- Async it! -->
 	<java expr="#{echoService}" g="31,96,92,52" method="sayHello" name="echo">
 		<transition g="-70,-22" name="echo2" to="echo2"/>
 	</java>
@@ -19,9 +20,16 @@
 
 	<state g="16,264,122,52" name="accept">
 		<transition g="-63,-22" name="transition" to="grant access"/>
+		<transition g="-63,-22" name="to timeout" to="timed out">
+         	<timer duedate="10 seconds"/>
+		</transition>
 	</state>
 
 	<state g="31,370,92,52" name="grant access">
+		<transition g="-54,-22" name="transition" to="finish"/>
+	</state>
+	
+	<state g="242,361,92,52" name="timed out">
 		<transition g="-54,-22" name="transition" to="finish"/>
 	</state>
 
