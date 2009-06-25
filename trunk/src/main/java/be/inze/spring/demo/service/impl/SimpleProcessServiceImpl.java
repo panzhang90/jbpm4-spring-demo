@@ -27,7 +27,12 @@ public class SimpleProcessServiceImpl implements SimpleProcessService{
 	}
 	
 	public void signal(Execution execution) {
-		
+		if (execution.getState().equals(Execution.STATE_INACTIVE_SCOPE)) {
+		  System.out.println("INACTIVE SCOPE");
+		  
+		  execution =  execution.getExecutions().iterator().next();
+		}
+	  
 		executionService.signalExecutionById(execution.getId(), "transition");
 	}
 
