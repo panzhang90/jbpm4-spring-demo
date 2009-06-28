@@ -57,7 +57,7 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
   }
 
   /**
-   * {@inheritDoc)
+   * {@inheritDoc)
    */
   protected void injectDependencies() throws Exception {
     super.injectDependencies();
@@ -88,26 +88,26 @@ public abstract class AbstractTransactionalSpringJbpmTestCase extends AbstractTr
    * deploys the process, keeps a reference to the deployment and automatically
    * deletes the deployment in the tearDown
    */
-  public long deployJpdlXmlString(String jpdlXmlString) {
-    long deploymentDbid = repositoryService.createDeployment().addResourceFromString("xmlstring.jpdl.xml", jpdlXmlString).deploy();
+  public String deployJpdlXmlString(String jpdlXmlString) {
+    String deploymentId = repositoryService.createDeployment().addResourceFromString("xmlstring.jpdl.xml", jpdlXmlString).deploy();
 
-    return deploymentDbid;
+    return deploymentId;
   }
 
   /**
    * deploys the process, keeps a reference to the deployment and automatically
    * deletes the deployment in the tearDown
    */
-  public long deployJpdlFrpmClasspath(String jpdlXmlString) {
-    long deploymentDbid;
+  public String deployJpdlFrpmClasspath(String jpdlXmlString) {
+    String deploymentId;
     try {
-      deploymentDbid = repositoryService.createDeployment().addResourceFromInputStream("xmlstring.jpdl.xml",
+      deploymentId = repositoryService.createDeployment().addResourceFromInputStream("xmlstring.jpdl.xml",
               new ClassPathResource(jpdlXmlString).getInputStream()).deploy();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
-    return deploymentDbid;
+    return deploymentId;
   }
 
   public void assertTextPresent(String expected, String value) {
