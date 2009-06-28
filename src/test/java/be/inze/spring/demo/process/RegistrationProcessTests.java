@@ -6,12 +6,11 @@ import org.jbpm.api.Execution;
 import org.jbpm.api.ProcessInstance;
 import org.jbpm.api.activity.ActivityExecution;
 import org.jbpm.api.job.Job;
-import org.jbpm.spring.test.AbstractTransactionalSpringJbpmTestCase;
+import org.jbpm.test.AbstractTransactionalSpringJbpmTestCase;
 
 public class RegistrationProcessTests extends
 		AbstractTransactionalSpringJbpmTestCase {
 
-	private long processDefinitionId;
 	private String processInstanceId;
 	
 	@Override
@@ -26,7 +25,7 @@ public class RegistrationProcessTests extends
 	@Override
 	protected void onSetUpInTransaction() throws Exception {
 		super.onSetUpInTransaction();
-		deployJpdlFrpmClasspath("be/inze/spring/process/Registration.jpdl.xml");
+		deployJpdlFromClasspath("be/inze/spring/process/Registration.jpdl.xml");
 	}
 
 	public void testStart() {
